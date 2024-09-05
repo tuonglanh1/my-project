@@ -1,14 +1,20 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/my-project/src",
+  "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true,
+    "assets": [
+      {
+        "include": "i18n/**/*",
+        "watchAssets": true,
+        "outDir": "dist/i18n"
+      }
+    ],
     "webpack": true,
-    "tsConfigPath": "apps/my-project/tsconfig.app.json"
+    "tsConfigPath": "apps/portal-service/tsconfig.app.json"
   },
   "monorepo": true,
-  "root": "apps/my-project",
+  "root": "apps/portal-service",
   "projects": {
     "my-project": {
       "type": "application",

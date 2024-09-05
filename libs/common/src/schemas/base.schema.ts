@@ -1,5 +1,5 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { User } from "../user/schema/user.schema";
+import { Prop } from '@nestjs/mongoose';
+// import { User } from '../user/schema/user.schema';
 
 export class Base {
   @Prop()
@@ -8,11 +8,12 @@ export class Base {
   @Prop()
   updated_at: Date;
 
-  @Prop({type:String, default:'admin'})
+  @Prop({ type: String, default: 'admin' })
   created_by: string;
   //
-  @Prop({type:String})
-  updated_by: User['updated_by'];
+  @Prop({ type: String })
+  updated_by: string;
+  // updated_by: User['updated_by'];
 
   @Prop({
     type: Number,

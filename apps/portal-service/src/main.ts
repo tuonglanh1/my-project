@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { PortalServiceModule } from './portal-service.module';
-import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { json, urlencoded } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { Common } from '@app/common/function';

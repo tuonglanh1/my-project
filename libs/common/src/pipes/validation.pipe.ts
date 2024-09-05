@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
-import { I18nService } from 'nestjs-i18n';
+// import { I18nService } from "nestjs-i18n";
 import * as _ from 'lodash';
 import '@app/shared/utils/dotenv';
 import { Common } from '../function';
@@ -17,8 +17,7 @@ import { Common } from '../function';
 @Injectable()
 export class ValidationPipe implements PipeTransform<any> {
   @Inject()
-  private readonly i18n: I18nService;
-
+  // private readonly i18n: I18nService;
   async transform(value: any, metadata: ArgumentMetadata) {
     const { metatype } = metadata;
     if (!metatype || !this.toValidate(metatype)) {
@@ -85,7 +84,8 @@ export class ValidationPipe implements PipeTransform<any> {
     // let object_name =
     //     Common.translateObjectMapping(constructorName) + '.' + property;
     let object_name = '';
-    object_name = await this.i18n.translate('fields.' + object_name, {});
+    // object_name = await this.i18n.translate("fields." + object_name, {});
+    object_name = '';
     const {
       isNotEmpty,
       isString,
@@ -105,25 +105,28 @@ export class ValidationPipe implements PipeTransform<any> {
     } = errorsObject;
     if (isNotEmpty) {
       errors.push(
-        await this.i18n.translate('validations.required', {
-          args: { attribute: object_name },
-        }),
+        '',
+        // await this.i18n.translate('validations.required', {
+        //   args: { attribute: object_name },
+        // }),
       );
     }
 
     if (isString) {
       errors.push(
-        await this.i18n.translate('validations.string', {
-          args: { attribute: object_name },
-        }),
+        '',
+        // await this.i18n.translate('validations.string', {
+        //   args: { attribute: object_name },
+        // }),
       );
     }
 
     if (isEmail) {
       errors.push(
-        await this.i18n.translate('validations.not_regex', {
-          args: { attribute: object_name },
-        }),
+        // await this.i18n.translate("validations.not_regex", {
+        //   args: { attribute: object_name }
+        // })
+        '',
       );
     }
 
@@ -131,13 +134,14 @@ export class ValidationPipe implements PipeTransform<any> {
       const parameter1 = length?.split(' ')[0];
       const parameter2 = length?.split(' ')[1];
       errors.push(
-        await this.i18n.translate('validations.between.string', {
-          args: {
-            attribute: object_name,
-            min: parameter1,
-            max: parameter2,
-          },
-        }),
+        '',
+        // await this.i18n.translate("validations.between.string", {
+        //   args: {
+        //     attribute: object_name,
+        //     min: parameter1,
+        //     max: parameter2
+        //   }
+        // })
       );
     }
 
@@ -145,42 +149,47 @@ export class ValidationPipe implements PipeTransform<any> {
       // const parameter1 = isIn.split(' ')[0];
       const parameter1 = isIn.toString();
       errors.push(
-        await this.i18n.translate('validations.enum', {
-          args: { attribute: object_name, values: parameter1 },
-        }),
+        // await this.i18n.translate("validations.enum", {
+        //   args: { attribute: object_name, values: parameter1 }
+        // })
+        '',
       );
     }
 
     if (isArray) {
       errors.push(
-        await this.i18n.translate('validations.not_regex', {
-          args: { attribute: object_name },
-        }),
+        // await this.i18n.translate("validations.not_regex", {
+        //   args: { attribute: object_name }
+        // })
+        '',
       );
     }
 
     if (isObject) {
       errors.push(
-        await this.i18n.translate('validations.not_regex', {
-          args: { attribute: object_name },
-        }),
+        // await this.i18n.translate("validations.not_regex", {
+        //   args: { attribute: object_name }
+        // })
+        '',
       );
     }
 
     if (validateNested) {
       errors.push(
-        await this.i18n.translate('validations.not_regex', {
-          args: { attribute: object_name },
-        }),
+        // await this.i18n.translate("validations.not_regex", {
+        //   args: { attribute: object_name }
+        // })
+        '',
       );
     }
 
     if (max) {
       const parameter1 = max?.split(' ')[0];
       errors.push(
-        await this.i18n.translate('validations.max.numeric', {
-          args: { attribute: object_name, max: parameter1 },
-        }),
+        // await this.i18n.translate("validations.max.numeric", {
+        //   args: { attribute: object_name, max: parameter1 }
+        // })
+        '',
       );
     }
 
@@ -188,51 +197,57 @@ export class ValidationPipe implements PipeTransform<any> {
       const param = min?.split(' ');
       const parameter1 = param[param.length - 1];
       errors.push(
-        await this.i18n.translate('validations.min.numeric', {
-          args: { attribute: object_name, min: parameter1 },
-        }),
+        // await this.i18n.translate("validations.min.numeric", {
+        //   args: { attribute: object_name, min: parameter1 }
+        // })
+        '',
       );
     }
     if (maxLength) {
       const parameter1 = maxLength?.split(' ')[0];
       errors.push(
-        await this.i18n.translate('validations.max.string', {
-          args: { attribute: object_name, max: parameter1 },
-        }),
+        // await this.i18n.translate("validations.max.string", {
+        //   args: { attribute: object_name, max: parameter1 }
+        // })
+        '',
       );
     }
 
     if (isEnum) {
       const parameter1 = isEnum?.split(' ')[0];
       errors.push(
-        await this.i18n.translate('validations.enum', {
-          args: { attribute: object_name, values: parameter1 },
-        }),
+        // await this.i18n.translate("validations.enum", {
+        //   args: { attribute: object_name, values: parameter1 }
+        // })
+        '',
       );
     }
 
     if (arrayMinSize) {
       const parameter1 = arrayMinSize?.split(' ')[0];
       errors.push(
-        await this.i18n.translate('validations.min.array', {
-          args: { attribute: object_name, min: parameter1 },
-        }),
+        // await this.i18n.translate("validations.min.array", {
+        //   args: { attribute: object_name, min: parameter1 }
+        // })
+        '',
       );
     }
 
     if (isMongoId) {
       errors.push(
-        await this.i18n.translate('validations.not_regex', {
-          args: { attribute: object_name },
-        }),
+        // await this.i18n.translate("validations.not_regex", {
+        //   args: { attribute: object_name }
+        // })
+        '',
       );
     }
 
     if (isBoolean) {
       errors.push(
-        await this.i18n.translate('validations.not_regex', {
-          args: { attribute: object_name },
-        }),
+        // await this.i18n.translate("validations.not_regex", {
+        //   args: { attribute: object_name }
+        // })
+        '',
       );
     }
 

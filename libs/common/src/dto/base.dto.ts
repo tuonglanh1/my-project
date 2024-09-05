@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude, Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
-import { UserDto } from '../user/dto/user.dto';
+import { Type } from 'class-transformer';
+import { IsNotEmpty } from 'class-validator';
+// import { UserDto } from '../user/dto/user.dto';
 
 export class BaseDto {
   // @ApiProperty({
@@ -30,21 +30,21 @@ export class BaseDto {
   @IsNotEmpty()
   updated_at: Date;
 
-  @ApiProperty({
-    description: 'Created by',
-    required: true,
-  })
-  @IsNotEmpty()
-  @Type(() => UserDto)
-  created_by: UserDto;
+  // @ApiProperty({
+  //   description: 'Created by',
+  //   required: true,
+  // })
+  // @IsNotEmpty()
+  // @Type(() => UserDto)
+  // created_by: UserDto;
 
-  @ApiProperty({
-    description: 'Updated by',
-    required: true,
-  })
-  @IsNotEmpty()
-  @Type(() => UserDto)
-  updated_by: UserDto;
+  // @ApiProperty({
+  //   description: 'Updated by',
+  //   required: true,
+  // })
+  // @IsNotEmpty()
+  // @Type(() => UserDto)
+  // updated_by: UserDto;
 
   @ApiProperty({
     description: 'Version',

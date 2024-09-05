@@ -1,19 +1,26 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { COLLECTION_NAME, User, UserSchema } from './schema/user.schema';
-import { UserService } from '../../providers/user.service';
-import { UserController } from "./user.controller";
-import { UserPagesModule } from "../user-pages/user-pages.module";
-import { UserModulesModule } from "../user-modules/user-modules.module";
-import { UserRolesModule } from "../user-roles/user-roles.module";
-import { UserActionsModule } from "../user-actions/user-actions.module";
+import { COLLECTION_NAME, UserSchema } from './schema/user.schema';
+import { UserService } from '../../../../../libs/module/users/user.service';
+import { UserController } from './user.controller';
+import { CONNECTION_NAME } from '@app/common';
 
 @Module({
   imports: [
+    // MongooseModule.forFeature(
+    //   [
+    //     {
+    //       name: COLLECTION_NAME,
+    //       schema: UserSchema,
+    //       collection: 'area_groups',
+    //     },
+    //   ],
+    //   CONNECTION_NAME.PRIMARY,
+    // ),
     MongooseModule.forFeature([{ name: COLLECTION_NAME, schema: UserSchema }]),
-    UserPagesModule, UserModulesModule , UserRolesModule, UserActionsModule
   ],
-  controllers:[UserController],
+
+  controllers: [UserController],
   providers: [UserService],
   exports: [UserService],
 })
